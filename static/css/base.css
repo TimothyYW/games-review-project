@@ -5,6 +5,12 @@
     --title: 'Shadows Into Light', serif;
     --main-font: 'Noto Serif Display', serif;
 
+    /* colours */
+    --background: black;
+
+    /* utils */
+    --small-box-shadow: 1px -1px 7px 0 black;
+    --border: 1px solid grey;
 }
 
 /* header */
