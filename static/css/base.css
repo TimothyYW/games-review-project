@@ -23,6 +23,15 @@
     box-shadow: var(--smal-box-shadow);
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    flex-direction: column;
+    font-family: var(--main-font);
+}
+
 a.nav-link {
     color: var(--black);
 }
