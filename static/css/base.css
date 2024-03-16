@@ -36,6 +36,17 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--title);
 }
 
+main {
+    flex: 1 0 auto;
+    background-color: var(--white);
+}
+
+/* footer */
+
+footer {
+    flex-shrink: 0;
+}
+
 a.nav-link {
     color: var(--black);
 }
