@@ -7,6 +7,9 @@
 
     /* colours */
     --background: black;
+    --white: white;
+    --grey: rgb(61, 61, 61);
+    --light blue
 
     /* utils */
     --small-box-shadow: 1px -1px 7px 0 black;
