@@ -1,8 +1,7 @@
-{% extends "account/base_entrance.html" %}
+{% extends "account/base.html" %}
 {% load allauth i18n %}
-{% block head %}
-    {% trans "Signup" %}
-{% endblock head %}
+
+{% block title %}{% trans "Signup" %}{% endblock %}
 {% block content %}
 
 <div class="container text-center">

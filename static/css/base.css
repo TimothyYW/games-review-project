@@ -12,6 +12,7 @@
     --light-blue: rgb(104, 114, 255);
     --black: black;
 
+
     /* utils */
     --small-box-shadow: 1px -1px 7px 0 black;
     --border: 1px solid grey;
@@ -49,4 +50,18 @@ footer {
 
 a.nav-link {
     color: var(--black);
+}
+
+.active {
+    border-bottom: 3px solid var(--light-blue);
+    font-weight: 400;
+}
+
+/* forms */
+
+.form {
+    width: 100%;
+    margin: 3% auto;
+    box-shadow: var(--small-box-shadow);
+    border-radius: 6px;
 }
