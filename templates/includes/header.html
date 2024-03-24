@@ -19,7 +19,7 @@
                 <a class="nav-link" href="#">Games</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Review</a>
+                <a class="nav-link {% if url_name == 'Input_review' %}active{% endif %}" href="{% url 'Input_review' %}">Review</a>
               </li>
               {% if request.user.is_authenticated %}
               <li class="nav-item">
