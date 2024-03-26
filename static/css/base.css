@@ -65,3 +65,20 @@ a.nav-link {
     box-shadow: var(--small-box-shadow);
     border-radius: 6px;
 }
+
+/* reviews */
+
+.card {
+    height: 90%;
+    margin-top: 1rem;
+}
+
+.reviews {
+    text-decoration: none;
+    color: var(--grey);
+}
+
+.reviews:hover {
+    cursor: pointer;
+}
+

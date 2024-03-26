@@ -3,3 +3,21 @@
 {% block title %}Reviews{% endblock %}
 
 {% block content %}
+
+<div class="container d-flex flex-row flex-wrap justify-content-center">
+    <h1 class="text-center p-2">
+        Latest Reviews
+    </h1>
+
+    {% for recipe in recipes %} 
+    <a href="" class="reviews" aria-label="Click to view {{game.title}}">
+        <div class="card m-3" style="width: 18rem;">
+            <img src="{{game.image.url}}" class="card-img-top" alt="{{game.image_alt}}">
+            <div class="card-body">
+              <h2 class="card-title">{{game.title}}</h2>
+              <p class="card-text">{{reviews|truncatechars:100}}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
