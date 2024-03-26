@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, DeleteView
+from django.views.generic import (CreateView, ListView, DeleteView, UpdateView)
 
 from django.contrib.auth.mixins import (
     UserPassesTextMixin, LoginRequiredMixin
@@ -26,6 +26,16 @@ class InputReview(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(InputReview, self).form_valid(form)
+
+class EditReview(LoginRequiredMixin, UserPassesTextMixin, UpdateView):
+    """Edit a review"""
+    template_name: 'reviews/edit_review.edit_review.html'
+    model = Review
+    form_class = ReviewForm
+    success_url = '/reviews/'
+
+    def test_func(self):
+        return self.request.user == self.get_object().user
 
 class DeleteReview(LoginRequiredMixin, UserPassesTextMixin, DeleteView):
     """ Delete a review """
