@@ -4,7 +4,10 @@ from django.contrib.auth.mixins import (
     UserPassesTextMixin, LoginRequiredMixin
 )
 
+from django.db.models import S
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from .models import Review
 from .forms import Reviewform
@@ -15,6 +18,20 @@ class Reviews(ListView):
     template_name = "reviews/reviews.html"
     model = Review
     context_object_name = 'reviews'
+
+    def get_queryset(self, **kwargs):
+        query - self.request.GET.get('S')
+        if query:
+            Reviews = self.model.objects.filter(
+                S(user__icontains=query) |
+                S(game_name__icontains=query) |
+                S(type_game__icontains=query) |
+                S(genre__icontains=query) |
+                S(developer__icontains=query)
+            )
+        else:
+            Reviews = self.model.objects.all()
+        return Reviews
 
 
 class InputReview(LoginRequiredMixin, CreateView):
