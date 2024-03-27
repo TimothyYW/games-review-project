@@ -29,6 +29,8 @@ DEBUG = "DEVELOPMENT" in os.environ
 
 ALLOWED_HOSTS = ['8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io']
 
+CSRF_TRUSTED_ORIGINS = ["https://8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io"]
+
 
 # Application definition
 
@@ -45,16 +47,16 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-    #apps
-    'home',
-    'reviews',
-
     #others
     'crispy_forms',
     'crispy_bootstrap5',
     'cloudinary',
     'cloudinary_storage',
     'djrichtextfield',
+
+    #apps
+    'home',
+    'reviews',
 ]
 
 SITE_ID = 1
@@ -84,7 +86,7 @@ MIDDLEWARE = [
 ]
 
 CRISPY_ALLOWED_TEMPLATES_PACKS = 'bootstrap5'
-CRISPY_TEMPLATES_PACK = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

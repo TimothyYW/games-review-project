@@ -38,6 +38,7 @@ class InputReview(LoginRequiredMixin, CreateView):
     """ Add review view """
     template_name = 'reviews/input_review.html'
     model = Review
+    form_class = Reviewform
     success_url = '/reviews/'
 
     def form_valid(self, form):
@@ -47,7 +48,7 @@ class InputReview(LoginRequiredMixin, CreateView):
 
 class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Edit a review"""
-    template_name: 'reviews/edit_review.edit_review.html'
+    template_name = 'reviews/edit_review.html'
     model = Review
     form_class = Reviewform
     success_url = '/reviews/'
