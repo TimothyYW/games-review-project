@@ -1,4 +1,4 @@
-from django.views.generic import (CreateView, ListView, DeleteView, UpdateView)
+from django.views.generic import (CreateView, ListView, DeleteView, UpdateView, DetailView)
 
 from django.contrib.auth.mixins import (
     UserPassesTestMixin, LoginRequiredMixin
@@ -32,6 +32,13 @@ class Reviews(ListView):
         else:
             Reviews = self.model.objects.all()
         return Reviews
+
+
+class ReviewDetail(DetailView):
+    """ View a single review """
+    template_name = "reviews/review_detail.html"
+    model = Review
+    context_object_name = 'review'
 
 
 class InputReview(LoginRequiredMixin, CreateView):

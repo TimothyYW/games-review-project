@@ -1,0 +1,35 @@
+{% extend "base.html" %}
+
+{% block title %} Review Detail - {{review.title}}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="review-info mt-3 p-1">
+            <div class="review-img">
+                <img src="{{ review.image.url }}" alt="{{ review.img_url }}" class="review-pic">
+            </div>
+            <div class="review-detail">
+                <h1 class="text-center">{{ review.title }}</h1>
+                <p class="text-center">Posted by {{review.user}} on {{review.posted_date}}</p>
+                <hr>
+                <p><strong>Game name:</strong> {{ review.game_name }}</p>
+                <p><strong>Developer:</strong>{{ review.developer }}</p>
+                <p><strong>Game type:</strong> {{ review.game_type }}</p>
+                <p><strong>Genre:</strong>{{ review.genre }}</p>
+                
+                {% if request.user == review.user %}
+                <div class="text-center">
+                    <a href="" class="btn btn-primary w-25">Edit</a>
+                    <a href="" class="btn btn-primary w-25">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="review-container">
+            <div class="review p3">
+                <h2>Review</h2>
+                <p>{{ review.review|safe }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

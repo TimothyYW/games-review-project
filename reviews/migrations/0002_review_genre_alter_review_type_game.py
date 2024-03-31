@@ -6,18 +6,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reviews', '0001_initial'),
+        ("reviews", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='review',
-            name='genre',
-            field=models.CharField(choices=[('horror', 'Horror'), ('action', 'Action'), ('story_telling', 'Story telling')], default='Games', max_length=50),
+            model_name="review",
+            name="genre",
+            field=models.CharField(
+                choices=[
+                    ("horror", "Horror"),
+                    ("action", "Action"),
+                    ("story_telling", "Story telling"),
+                ],
+                default="Games",
+                max_length=50,
+            ),
         ),
         migrations.AlterField(
-            model_name='review',
-            name='type_game',
-            field=models.CharField(choices=[('multiplayer', 'Multiplayer'), ('single_player', 'Single Plyer')], default='Single Player', max_length=50),
+            model_name="review",
+            name="type_game",
+            field=models.CharField(
+                choices=[
+                    ("multiplayer", "Multiplayer"),
+                    ("single_player", "Single Plyer"),
+                ],
+                default="Single Player",
+                max_length=50,
+            ),
         ),
     ]

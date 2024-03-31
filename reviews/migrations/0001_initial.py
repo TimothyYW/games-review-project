@@ -17,17 +17,54 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Review',
+            name="Review",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('game_name', models.CharField(max_length=300)),
-                ('review', djrichtextfield.models.RichTextField(max_length=500)),
-                ('image', django_resized.forms.ResizedImageField(crop=None, force_format='WEBP', keep_meta=True, quality=80, scale=None, size=[400, None], upload_to='game/')),
-                ('image_alt', models.CharField(max_length=100)),
-                ('type_game', models.CharField(choices=[('fps', 'FPS'), ('third_person_shooter', 'Third Person Shooter'), ('rpg', 'RPG')], default='games', max_length=50)),
-                ('developer', models.CharField(max_length=20)),
-                ('posted', models.DateTimeField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='review_owner', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("game_name", models.CharField(max_length=300)),
+                ("review", djrichtextfield.models.RichTextField(max_length=500)),
+                (
+                    "image",
+                    django_resized.forms.ResizedImageField(
+                        crop=None,
+                        force_format="WEBP",
+                        keep_meta=True,
+                        quality=80,
+                        scale=None,
+                        size=[400, None],
+                        upload_to="game/",
+                    ),
+                ),
+                ("image_alt", models.CharField(max_length=100)),
+                (
+                    "type_game",
+                    models.CharField(
+                        choices=[
+                            ("fps", "FPS"),
+                            ("third_person_shooter", "Third Person Shooter"),
+                            ("rpg", "RPG"),
+                        ],
+                        default="games",
+                        max_length=50,
+                    ),
+                ),
+                ("developer", models.CharField(max_length=20)),
+                ("posted", models.DateTimeField(auto_now=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="review_owner",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
