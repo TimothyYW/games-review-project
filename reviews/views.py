@@ -1,7 +1,7 @@
-from django.views.generic import (CreateView, ListView, DeleteView, UpdateView)
+from django.views.generic import (CreateView, ListView, DeleteView, UpdateView, DetailView)
 
 from django.contrib.auth.mixins import (
-    UserPassesTextMixin, LoginRequiredMixin
+    UserPassesTestMixin, LoginRequiredMixin
 )
 
 from django.db.models import Q
@@ -20,18 +20,24 @@ class Reviews(ListView):
     context_object_name = 'reviews'
 
     def get_queryset(self, **kwargs):
-        query = self.request.GET.get('s')
+        query = self.request.GET.get('Q')
         if query:
-            reviews = self.model.object.filter(
-                s(game_name=query) |
-                s(game_type=query)  |
-                s(genre=query)  |
-                s(developer=query)
+            reviews = self.model.objects.filter(
+                Q(game_name=query) |
+                Q(game_type=query)  |
+                Q(genre=query)  |
+                Q(developer=query)
             )
         else:
-            reviews = self.model.object.all()
+            reviews = self.model.objects.all()
         return reviews
 
+class ReviewDetail(DetailView):
+    """View a single recipe"""
+
+    template_name = "reviews/review_detail.html"
+    model = Review
+    context_object_name = "review"
 
 class InputReview(LoginRequiredMixin, CreateView):
     """ Add review view """
@@ -43,17 +49,17 @@ class InputReview(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(InputReview, self).form_valid(form)
 
-class EditReview(LoginRequiredMixin, UserPassesTextMixin, UpdateView):
+class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Edit a review"""
-    template_name: 'reviews/edit_review.edit_review.html'
+    template_name = 'reviews/edit_review.edit_review.html'
     model = Review
-    form_class = ReviewForm
+    form_class = Reviewform
     success_url = '/reviews/'
 
     def test_func(self):
         return self.request.user == self.get_object().user
 
-class DeleteReview(LoginRequiredMixin, UserPassesTextMixin, DeleteView):
+class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """ Delete a review """
     model = Review
     success_url = '/reviews/'
