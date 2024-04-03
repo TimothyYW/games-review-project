@@ -21,7 +21,7 @@
 /* header */
 .navbar {
     background-color: var(--white);
-    box-shadow: var(--smal-box-shadow);
+    box-shadow: var(--small-box-shadow);
 }
 
 html, body {
@@ -103,6 +103,53 @@ a.nav-link {
 .review-pic {
     width: 100%;
     height: auto;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.a.img-container {
+    position: relative;
+    text-align: center;
+    color: var(--white);
+    margin: 3%;
+    overflow: hidden;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    box-shadow: var(--small-box-shadow);
+}
+
+a.img-container:hover {
+    color: var(--white);
+}
+
+.img-container img {
+    width: 100%;
+    height: auto;
+}
+
+.centered {
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    
+}
+
+@media screen and (min-width:40em){
+    .form {
+        width: 50%;
+    }
+    .review-container {
+        flex-direction: row;
+    }
+    .img-container{
+        
+    }
 }
 
 @media screen and (min-width: 62.5em) {

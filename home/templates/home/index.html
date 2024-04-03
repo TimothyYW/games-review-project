@@ -1,1 +1,32 @@
 {% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content%}
+
+<div class="container flex-column pt-3">
+    <section class="text-center">
+        <h1 class="main-title mx-auto">Review your favorite or least games</h1>
+        <p class="pt-4">
+            Welcome to the gaming review website, 
+            in here you can leave your review about certain games and let others see it.
+            So others could considered it before buying the game.
+        </p>
+    </section>
+    <section>
+        <div class="review-container">
+            {% for review in review %}
+            <a href="{% url 'review_detail' review.id %}" class="img-container">
+                <img src="{{review.image.url}}" alt="{{review.image.alt}}" style="width: 100%">
+                <div class="centered">
+                    <h2>
+                        {{review.title}}
+                    </h2>
+                </div>
+            </a>
+            {% endblock %}
+        </div>
+    </section>
+</div>
+
+{% endblock %}
