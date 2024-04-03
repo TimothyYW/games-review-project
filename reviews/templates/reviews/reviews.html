@@ -9,7 +9,7 @@
         Latest Reviews
     </h1>
 
-    {% for recipe in recipes %} 
+    {% for review in review %} 
     <a href="{% url 'review_detail' review.id%}" class="reviews" aria-label="Click to view {{game.title}}">
         <div class="card m-3" style="width: 18rem;">
             <img src="{{game.image.url}}" class="card-img-top" alt="{{game.image_alt}}">

@@ -7,5 +7,5 @@ urlpatterns = [
     path("reviews/", Reviews.as_view(), name="reviews"),
     path("delete/<slug:pk>/", DeleteReview.as_view(), name="delete_review"),
     path("edit/<slug:pk>/", EditReview.as_view(), name="edit_review"),
-    path("<slug:pk>", ReviewDetail,as_view(), name="review_detail"),
+    path("<slug:pk>", ReviewDetail.as_view(), name="review_detail"),
 ]
