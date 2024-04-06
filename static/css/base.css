@@ -11,11 +11,28 @@
     --grey: rgb(61, 61, 61);
     --light-blue: rgb(104, 114, 255);
     --black: black;
+    --off-white: rgb(163, 163, 163);
 
 
     /* utils */
     --small-box-shadow: 1px -1px 7px 0 black;
     --border: 1px solid grey;
+}
+
+/* footer */
+footer {
+    flex-shrink: 0;
+    background-color: var(--off-white);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-top: var(--border);
+}
+
+.social-icon {
+    height: 2rem;
+    margin: 1rem;
 }
 
 /* header */
@@ -148,11 +165,16 @@ a.img-container:hover {
         flex-direction: row;
     }
     .img-container{
-        
+        flex-direction: row;
+        width: 30%;
+
     }
 }
 
 @media screen and (min-width: 62.5em) {
+    .main-title {
+        width: 50%;
+    }
     .review-info {
         flex-direction: row;
         border: 1px solid var(--black);
