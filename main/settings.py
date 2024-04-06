@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     #apps
     'home',
     'reviews',
+    'profiles',
 ]
 
 SITE_ID = 1
