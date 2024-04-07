@@ -157,6 +157,34 @@ a.img-container:hover {
     transform: translate(-50%, -50%);    
 }
 
+/* Profiles */
+
+.profile-img {
+    width: 280px;
+    margin: 0 auto;
+}
+
+.profile img img {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info {
+    width: 100%;
+    text-align: center;
+}
+
+.profile-reviews {
+    width: 100%;
+}
+
+
 @media screen and (min-width:40em){
     .form {
         width: 50%;
@@ -191,5 +219,22 @@ a.img-container:hover {
 
     .review-container {
         flex-direction: row;
+    }
+
+    .profile {
+        flex-direction: row;
+    }
+
+    .info {
+        width: 30%;
+    }
+
+    .profile-reviews {
+        width: 70%;
+        padding: 1.5rem 3rem;
+    }
+
+    .profile-reviews a {
+        text-decoration: none;
     }
 }
