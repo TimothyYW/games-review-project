@@ -35,6 +35,16 @@ footer {
     margin: 1rem;
 }
 
+a.nav-link {
+    color: var(--black);
+}
+
+.active {
+    border-bottom: 3px solid var(--light-blue);
+    font-weight: 400;
+}
+
+
 /* header */
 .navbar {
     background-color: var(--white);
@@ -57,21 +67,6 @@ h1, h2, h3, h4, h5, h6 {
 main {
     flex: 1 0 auto;
     background-color: var(--white);
-}
-
-/* footer */
-
-footer {
-    flex-shrink: 0;
-}
-
-a.nav-link {
-    color: var(--black);
-}
-
-.active {
-    border-bottom: 3px solid var(--light-blue);
-    font-weight: 400;
 }
 
 /* forms */
