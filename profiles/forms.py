@@ -1,14 +1,13 @@
 from django import forms
 from .models import Profile
 
-
-class Profileform(form.Modalform):
-    """Form to create a profile"""
+class ProfileForm(forms.ModelForm):
+    """ Form to create a profile """
     class Meta:
-        modal = Profile
+        model = Profile
         fields = ["image", "bio"]
 
         labels = {
             "image": "Avatar",
-            "bio": "Bio",
+            "bio": "Bio"
         }
