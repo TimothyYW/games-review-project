@@ -3,7 +3,7 @@ from djrichtextfield.widgets import RichTextWidget
 from .models import Review
 
 
-class Reviewform(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     """Form to leave the review"""
 
     class Meta:
@@ -18,7 +18,7 @@ class Reviewform(forms.ModelForm):
             "developer",
         ]
 
-        review = forms.CharField(widget=RichTextWidget())
+        reviews = forms.CharField(widget=RichTextWidget())
 
         widgets = {
             "review": forms.Textarea(attrs={"rows": 5}),

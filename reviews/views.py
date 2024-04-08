@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Review
-from .forms import Reviewform
+from .forms import ReviewForm
 
 
 class Reviews(ListView):
@@ -53,7 +53,7 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Edit a review"""
     template_name = 'reviews/edit_review.edit_review.html'
     model = Review
-    form_class = Reviewform
+    form_class = ReviewForm
     success_url = '/reviews/'
 
     def test_func(self):

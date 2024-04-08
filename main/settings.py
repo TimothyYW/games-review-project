@@ -47,17 +47,17 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    #apps
+    'home',
+    'reviews',
+    'profiles',
+
     #others
     'crispy_forms',
     'crispy_bootstrap5',
     'cloudinary',
     'cloudinary_storage',
     'djrichtextfield',
-
-    #apps
-    'home',
-    'reviews',
-    'profiles',
 ]
 
 SITE_ID = 1
@@ -174,7 +174,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFCATION = 'none'
 ACCOUNT_USERNAME_MIN_LENGTH = 5
-LOGIN_URL = 'template/accounts/login/'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
