@@ -1,13 +1,29 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+![Website logo](images/Logo.png)
 
-Welcome Timothy Wewengkang,
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Technologies
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+- Python
+- Django
+- HTML/CSS
+- Bootstrap
+- Google Cloud Platform
+- Cloudinary
 
-## Gitpod Reminders
+## Link to the website and video
 
+- https://cdnjs.com/libraries/bootstrap - CDN for bootstrap links
+- https://getbootstrap.com/docs/5.2/getting-started/introduction - Bootstrap documentation
+- https://uxwing.com/ - UX Wing icons
+- https://django-allauth.readthedocs.io/en/latest/installation.html - Django-Allauth
+- https://django-crispy-forms.readthedocs.io/en/latest/install.html - Crispy Forms
+- https://pypi.org/project/django-reorder/ - Django Reordered
+- https://docs.djangoproject.com/en/4.1/topics/class-based-views/mixins/ - Django Mixins
+- https://cloudinary.com/ - Cloudinary
+- https://django-ckeditor.readthedocs.io/en/latest/ - CKEditor
+- https://books.agiliq.com/projects/django-orm-cookbook/en/latest/query_relatedtool.html - Q Objects
+- https://www.w3schools.com/howto/howto_css_modals.asp - CSS Modal
+- https://www.design.com/ Logo for the website 
 To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
 
 `python3 -m http.server`
