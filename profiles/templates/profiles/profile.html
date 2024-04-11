@@ -8,22 +8,22 @@
     <div class="profile">
         <div class="info">
             <div class="profile-img text center">
-                {% if.profile.image.url is not none %}
+                {% if profile.image.url is not none %}
                 <img src="{{ profile.img.url }}" alt="{{ profile.user.username }}`s profile image">
                 {% else %}
                 <img src="{% static '/static/image/no-profile-picture.svg' %}" alt="Image not found icon">
                 {% endif %}
             </div> 
             <h1>{{ profile.user.username }}</h1>
-            <p><strong>Joined: </strong>{{ profile.user.date_joined|date: 'd M Y' }}</p>
+            <p><strong>Joined: </strong>{{ profile.user.date_joined|date:'d M Y' }}</p>
             <p><strong>Review: </strong>{{ profile.user.review_owner.count }}</p>
             {% if profile.bio is not none %}
             {{ profile.bio|safe }}
             {% endif %}
 
-            {% if.request.user == profile.user %}
+            {% if request.user == profile.user %}
             <button id="myBtn" class="btn btn-primary w-25 ab-4">Edit</button>
-            {% endif %}
+        {% endif %}    
         </div>
         <div class="profile-review">
             <h2 class="text-center pb-4">Latest Review</h2>
@@ -31,7 +31,7 @@
             <a href="{% url 'review_detail' review.id}"><h3>{{ review.title }}</h3></a>
             {{ review.posted_date }}
             <hr>
-            {{% endfor %}}
+            {% endfor %}
         </div>
     </div>
     <!-- The Modal -->

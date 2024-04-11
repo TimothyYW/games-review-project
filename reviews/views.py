@@ -43,6 +43,7 @@ class InputReview(LoginRequiredMixin, CreateView):
     """ Add review view """
     template_name = 'reviews/input_review.html'
     model = Review
+    form_class = ReviewForm
     success_url = '/reviews/'
 
     def form_valid(self, form):
