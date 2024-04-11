@@ -3,13 +3,12 @@
 {% block title %}Reviews{% endblock %}
 
 {% block content %}
-
-<div class="container d-flex flex-row flex-wrap justify-content-center">
-    <h1 class="text-center p-2">
+<h1 class="text-center p-2">
         Latest Reviews
-    </h1>
+</h1>
+<div class="container d-flex flex-row flex-wrap justify-content-center">
 
-    {% for review in review %} 
+    {% for review in reviews %} 
     <a href="{% url 'review_detail' review.id %}" class="reviews" aria-label="Click to view {{game.title}}">
         <div class="card m-3" style="width: 18rem;">
             <img src="{{game.image.url}}" class="card-img-top" alt="{{game.image_alt}}">
