@@ -69,6 +69,8 @@ main {
     background-color: var(--white);
 }
 
+
+
 /* forms */
 
 .form {
@@ -76,12 +78,6 @@ main {
     margin: 3% auto;
     box-shadow: var(--small-box-shadow);
     border-radius: 6px;
-}
-/* main */
-
-main {
-    background-image: url('../images/background-home_cx9mhp.png');
-    background-size: cover;
 }
 
 /* reviews */
