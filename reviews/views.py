@@ -33,7 +33,7 @@ class Reviews(ListView):
         return reviews
 
 class ReviewDetail(DetailView):
-    """View a single recipe"""
+    """View a single review"""
 
     template_name = "reviews/review_detail.html"
     model = Review
