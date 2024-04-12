@@ -1,6 +1,7 @@
 ![Website logo](../games-review-project/static/images/Logo.png)
 
 
+
 ## Technologies
 
 - Python

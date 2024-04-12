@@ -26,7 +26,7 @@ if os.path.exists('env.py'):
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = ['8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io','game-review-d934f4a1894a.herokuapp.com']
 
@@ -175,8 +175,8 @@ LOGIN_REDIRECT_URL = '/'
 
 STATIC_URL = '/static/'
 # ​STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_DIR = [os.path.join(BASE_DIR, 'staticfiles')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 
