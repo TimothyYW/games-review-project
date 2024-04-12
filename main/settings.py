@@ -30,7 +30,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io','game-review-d934f4a1894a.herokuapp.com']
 
-CSRF_TRUSTED_ORIGINS = ["https://8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io"]
+CSRF_TRUSTED_ORIGINS = ["https://8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io","https://game-review-d934f4a1894a.herokuapp.com"]
 
 
 # Application definition
