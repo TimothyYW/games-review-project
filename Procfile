@@ -1,1 +1,1 @@
-web: node base.html
+web: gunicorn main.wsgi
