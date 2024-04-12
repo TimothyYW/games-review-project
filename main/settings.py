@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['game-review.herokuapp.com']
+ALLOWED_HOSTS = ['8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io','.herokuapp.com']
 
 CSRF_TRUSTED_ORIGINS = ["https://8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io"]
 
