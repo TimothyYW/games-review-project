@@ -1,1 +1,1 @@
-web: gunicorn game-review.wsgi
+web: gunicorn main.wsgi
