@@ -30,7 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io','game-review-d934f4a1894a.herokuapp.com']
 
-CSRF_TRUSTED_ORIGINS = ["https://8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io","https://game-review-d934f4a1894a.herokuapp.com"]
+CSRF_TRUSTED_ORIGINS = ["https://8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io",
+"https://game-review-d934f4a1894a.herokuapp.com"]
 
 
 # Application definition
@@ -184,3 +185,5 @@ CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
