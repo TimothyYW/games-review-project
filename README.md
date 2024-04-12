@@ -1,4 +1,4 @@
-![Website logo](images/Logo.png)
+![Website logo](../games-review-project/static/images/Logo.png)
 
 
 ## Technologies
@@ -25,6 +25,13 @@
 - https://www.w3schools.com/howto/howto_css_modals.asp - CSS Modal
 - https://www.design.com/ Logo for the website 
 To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+
+## Testing
+
+CSS testing result:
+
+![Testing CSS](../games-review-project/static/images/CSS_Testing.JPG)
+
 
 `python3 -m http.server`
 

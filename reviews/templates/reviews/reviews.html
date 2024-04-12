@@ -11,10 +11,10 @@
     {% for review in reviews %} 
     <a href="{% url 'review_detail' review.id %}" class="reviews" aria-label="Click to view {{game.title}}">
         <div class="card m-3" style="width: 18rem;">
-            <img src="{{game.image.url}}" class="card-img-top" alt="{{game.image_alt}}">
+            <img src="{{review.image.url}}" class="card-img-top" alt="{{review.image_alt}}">
             <div class="card-body">
-              <h2 class="card-title">{{game.title}}</h2>
-              <p class="card-text">{{reviews|truncatechars:100}}</p>
+              <h2 class="card-title">{{review.title}}</h2>
+              <p class="card-text">{{review.game_name.title|truncatechars:100}}</p>
             </div>
         </div>
     </a>
