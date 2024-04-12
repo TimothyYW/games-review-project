@@ -47,18 +47,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
-    #apps
+    'cloudinary_storage',
+    'cloudinary',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'djrichtextfield',
     'home',
     'reviews',
     'profiles',
-
-    #others
-    'crispy_forms',
-    'crispy_bootstrap5',
-    'cloudinary',
-    'cloudinary_storage',
-    'djrichtextfield',
 ]
 
 SITE_ID = 1
