@@ -233,6 +233,7 @@ Result:
 
 ## Link to the website and video
 
+- https://www.youtube.com/@IonaFrisbee django framework tutorial
 - https://cdnjs.com/libraries/bootstrap - CDN for bootstrap links
 - https://getbootstrap.com/docs/5.2/getting-started/introduction - Bootstrap documentation
 - https://uxwing.com/ - UX Wing icons
@@ -270,3 +271,4 @@ The site was deployed to Heroku. The steps to deploy are as follows:
 - Scroll down to Manual deploy and choose the main branch
 - Click deploy
 The app should now be deployed.
+
