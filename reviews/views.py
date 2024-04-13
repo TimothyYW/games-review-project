@@ -1,4 +1,5 @@
-from django.views.generic import (CreateView, ListView, DeleteView, UpdateView, DetailView)
+from django.views.generic import (
+    CreateView, ListView, DeleteView, UpdateView, DetailView)
 
 from django.contrib.auth.mixins import (
     UserPassesTestMixin, LoginRequiredMixin
@@ -24,20 +25,22 @@ class Reviews(ListView):
         if query:
             reviews = self.model.objects.filter(
                 Q(game_name=query) |
-                Q(game_type=query)  |
-                Q(genre=query)  |
+                Q(game_type=query) |
+                Q(genre=query) |
                 Q(developer=query)
             )
         else:
             reviews = self.model.objects.all()
         return reviews
 
-class ReviewDetail(DetailView):
+
+class ReviewDetai(DetailView):
     """View a single review"""
 
     template_name = "reviews/review_detail.html"
     model = Review
     context_object_name = "review"
+
 
 class InputReview(LoginRequiredMixin, CreateView):
     """ Add review view """
@@ -50,6 +53,7 @@ class InputReview(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(InputReview, self).form_valid(form)
 
+
 class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Edit a review"""
     template_name = 'reviews/edit_review.edit_review.html'
@@ -60,6 +64,7 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         return self.request.user == self.get_object().user
 
+
 class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """ Delete a review """
     model = Review
@@ -67,3 +72,4 @@ class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user == self.get_object().user
+        

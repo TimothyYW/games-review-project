@@ -36,7 +36,11 @@ class Review(models.Model):
     type_game = models.CharField(
         max_length=50, choices=GAME_TYPE, default="Single Player"
     )
-    genre = models.CharField(max_length=50, choices=GENRE_TYPE, default="Games")
+    genre = models.CharField(
+        max_length=50,
+        choices=GENRE_TYPE,
+        default="Games"
+        )
     developer = models.CharField(max_length=20, null=False, blank=False)
     posted = models.DateTimeField(auto_now=True)
 
@@ -47,3 +51,4 @@ class Meta:
 
 def __str__(self):
     return str(self.title)
+

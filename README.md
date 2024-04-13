@@ -1,6 +1,72 @@
+# Game review website
+
 ![Website logo](../games-review-project/static/images/Logo.png)
 
+Welcome to the game review website where user could review their favorite or least favorite game, The app design to allowed user to leave review of their game of choice depending on title, type of game, and developer
 
+![Mock test](../games-review-project/static/images/Mock-up-test.png)
+
+[Link for Heroku](https://game-review-d934f4a1894a.herokuapp.com/)
+[Link for gitpod](https://8000-timothyyw-gamesreviewpr-vtsz4t7mvui.ws-eu110.gitpod.io/)
+
+# Table of Content
+
+
+# PEP8
+
+## manage.py
+Result:
+![Manage.py test result](../games-review-project/static/images/manage.py.png)
+
+## env.py
+Result:
+![env.py test result](../games-review-project/static/images/env.py.png)
+
+## Home
+
+### view.py
+Result:
+![home-view.py test result](../games-review-project/static/images/home-view.py.png)
+
+## Profile
+
+### models.py
+Result:
+![profile-models.py test result](../games-review-project/static/images/profile-models.py.png)
+
+### admin.py
+Result:
+![profile-admin.py test result](../games-review-project/static/images/profile-admin.py.png)
+
+## urls.py
+Result:
+![profile-urls.py test result](../games-review-project/static/images/profile-urls.py.png)
+
+## Review
+
+### View.py
+Result:
+![view.py test result](../games-review-project/static/images/view.py.reviews.png)
+
+### urls.py
+Result:
+![urls.py test result](../games-review-project/static/images/urls.py.png)
+
+### models.py
+Result:
+![models.py test result](../games-review-project/static/images/models.py.png)
+
+### app.py
+Result:
+![app.py test result](../games-review-project/static/images/app.py.png)
+
+### admin.py
+Result:
+![admin.py test result](../games-review-project/static/images/admin.py.png)
+
+## CSS testing result:
+
+![Testing CSS](../games-review-project/static/images/CSS_Testing.JPG)
 
 ## Technologies
 
@@ -10,6 +76,9 @@
 - Bootstrap
 - Google Cloud Platform
 - Cloudinary
+- Favicon.io
+- balsamiq
+
 
 ## Link to the website and video
 
@@ -27,108 +96,26 @@
 - https://www.design.com/ Logo for the website 
 To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
 
-## Testing
 
-CSS testing result:
+# Heroku Deployment
 
-![Testing CSS](../games-review-project/static/images/CSS_Testing.JPG)
+The site was deployed to Heroku. The steps to deploy are as follows:
 
-
-`python3 -m http.server`
-
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
-
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
-
-------
-
-## Release History
-
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
-
-**September 20 2023:** Update Python version to 3.9.17.
-
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
-
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
-
-**July 2 2021:** Remove extensions that are not available in Open VSX.
-
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
-
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
-
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
-
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
+- Navigate to heroku and create an account
+- Click the new button in the top right corner
+- Select create new app
+- Enter app name
+- Select region and click create app
+- Click the resources tab and search for Heroku Postgres
+- Select hobby dev and continue
+- Go to the settings tab and then click reveal config vars
+- Add the following config vars:
+    - SECRET_KEY: (Your secret key)
+    - DATABASE_URL: (This should already exist with add on of postgres)
+    - CLOUNDINARY_URL: (cloudinary api url)
+- Click the deploy tab
+- Scroll down to Connect to GitHub and sign in / authorize when prompted
+- In the search box, find the repositoy you want to deploy and click connect
+- Scroll down to Manual deploy and choose the main branch
+- Click deploy
+The app should now be deployed.
