@@ -9,7 +9,7 @@
         <div class="info">
             <div class="profile-img text center">
                 {% if profile.image.url is not none %}
-                <img src="{{ profile.img.url }}" alt="{{ profile.user.username }}`s profile image">
+                <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s profile image">
                 {% else %}
                 <img src="{% static 'static/image/no-profile-picture.svg' %}" alt="Image not found icon">
                 {% endif %}
@@ -43,7 +43,7 @@
             <h2 class="text-center fs-4">Edit Profile</h2>
             {% csrf_token %}
             {{form|crispy }}
-            {form.media}
+            {{ form.media }}
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary w-25">Edit</button>
             </div>

@@ -1,49 +1,77 @@
 {% load static %}
 
-<header>
-  {% with request.resolver_match.url_name as url_name %}  
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-        <!-- Logo -->
-          <a class="navbar-brand" href="#"><img src="{% static 'images/Logo.png' %}" alt="Games review" class="logo"></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <!-- Navigation items -->
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto ab-2">
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'reviews' %}active{% endif %}" href="{% url 'reviews' %}">Reviews</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'input_review' %}active{% endif %}" href="{% url 'input_review' %}">Input Reviews</a>
-              </li>
-              {% if request.user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/">Logout</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'profile' %}active{% endif %}" href="{% url 'profile' request.user.id %}">Profile</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}" href="/accounts/signup/">Register</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/accounts/login/">Login</a>
-              </li>
-              {% endif %}
-            </ul>
-            <!-- form for search bar -->
-            <form class="d-flex" role="search" method="GET" action="{% url 'reviews' %}">
-                <input class="form-control me-2" name="S" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit">Search</button>
-            </form>
-          </div>
+<header class="mb-4">
+    {% with request.resolver_match.url_name as url_name %}  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}" aria-label="Games Review Home">
+                <img src="{% static 'images/Logo.png' %}" alt="Games Review Logo" class="logo" width="150" height="50">
+            </a>
+
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_name == 'home' %}active{% endif %}" 
+                           href="{% url 'home' %}"
+                           {% if url_name == 'home' %}aria-current="page"{% endif %}>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_name == 'reviews' %}active{% endif %}" 
+                           href="{% url 'reviews' %}"
+                           {% if url_name == 'reviews' %}aria-current="page"{% endif %}>Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_name == 'input_review' %}active{% endif %}" 
+                           href="{% url 'input_review' %}"
+                           {% if url_name == 'input_review' %}aria-current="page"{% endif %}>Input Reviews</a>
+                    </li>
+                    
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if url_name == 'profile' %}active{% endif %}" 
+                           href="{% url 'profile' request.user.id %}"
+                           {% if url_name == 'profile' %}aria-current="page"{% endif %}>Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                <form class="d-flex" role="search" method="GET" action="{% url 'reviews' %}">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input class="form-control" 
+                               name="q" 
+                               type="search" 
+                               placeholder="Search reviews..." 
+                               aria-label="Search reviews"
+                               minlength="2"
+                               required>
+                        <button class="btn btn-outline-primary" type="submit" aria-label="Submit search">
+                            <span>Search</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-      </nav>
-  {% endwith %}
+    </nav>
+    {% endwith %}
 </header>

@@ -1,11 +1,14 @@
-{% extend "base.html" %}
+{% extends "base.html" %}
 
-{% block title %}Delete Review{% endblock %}
+{% block title %} - 403 Forbidden{% endblock %}
 
 {% block content %}
-    <div class="container text-center">
-        <h1>403 - Unathourized Access</h1>
-        <p>You are not athourized to perform this action</p>
-        <a href="{% url 'home' %}" class="btn btn-primary w-25">Home</a>
+<div class="container text-center my-5">
+    <div class="error-page">
+        <h1 class="display-4">403 - Unauthorized Access</h1>
+        <p class="lead">You are not authorized to perform this action.</p>
+        <hr class="my-4">
+        <a href="{% url 'home' %}" class="btn btn-primary">Return Home</a>
     </div>
+</div>
 {% endblock %}

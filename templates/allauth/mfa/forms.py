@@ -13,8 +13,15 @@ from allauth.mfa.utils import post_authentication
 class AuthenticateForm(forms.Form):
     code = forms.CharField(
         label=_("Code"),
+        min_length=6,
+        max_length=8,
         widget=forms.TextInput(
-            attrs={"placeholder": _("Code"), "autocomplete": "one-time-code"},
+            attrs={
+                "placeholder": _("Enter your authentication code"),
+                "autocomplete": "one-time-code",
+                "inputmode": "numeric",
+                "pattern": "[0-9]*",
+            }
         ),
     )
 
@@ -23,23 +30,10 @@ class AuthenticateForm(forms.Form):
         super().__init__(*args, **kwargs)
 
     def clean_code(self):
-        key = f"mfa-auth-user-{str(self.user.pk)}"
-        if not ratelimit.consume(
-            context.request,
-            action="login_failed",
-            key=key,
-        ):
-            raise forms.ValidationError(
-                get_account_adapter().error_messages["too_many_login_attempts"]
-            )
-
-        code = self.cleaned_data["code"]
-        for auth in Authenticator.objects.filter(user=self.user):
-            if auth.wrap().validate_code(code):
-                self.authenticator = auth
-                ratelimit.clear(context.request, action="login_failed", key=key)
-                return code
-        raise forms.ValidationError(get_adapter().error_messages["incorrect_code"])
+        code = self.cleaned_data["code"].strip()
+        if not code.isdigit():
+            raise forms.ValidationError(_("Please enter only digits."))
+        return code
 
     def save(self):
         post_authentication(context.request, self.authenticator)

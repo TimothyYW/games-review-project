@@ -1,0 +1,58 @@
+/* AllAuth Specific Styles */
+.auth-form {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.auth-form label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.auth-form .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+    color: var(--bs-danger);
+    font-size: 0.875rem;
+}
+
+.auth-form .alert {
+    margin-bottom: 1rem;
+}
+
+.socialaccount_providers {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.socialaccount_provider {
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+/* Authentication Pages */
+.login-form,
+.signup-form,
+.reset-form {
+    padding: 1rem;
+}
+
+.auth-links {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.auth-links a {
+    color: var(--bs-primary);
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+} 

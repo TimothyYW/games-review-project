@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from djrichtextfield.models import RichTextField
 from django_resized import ResizedImageField
 
 # Games type
-GAME_TYPE = (("multiplayer", "Multiplayer"), ("single_player", "Single Plyer"))
+GAME_TYPE = (("multiplayer", "Multiplayer"), ("single_player", "Single Player"))
 
 GENRE_TYPE = (
     ("horror", "Horror"),
@@ -15,40 +16,44 @@ GENRE_TYPE = (
 
 
 class Review(models.Model):
-    """
-    A model to add and manage reviews
-    """
-
+    """Review model with proper CRUD functionality"""
     user = models.ForeignKey(
-        User, related_name="review_owner", on_delete=models.CASCADE
+        User, 
+        related_name="review_owner", 
+        on_delete=models.CASCADE
     )
-    game_name = models.CharField(max_length=300, null=False, blank=False)
-    review = RichTextField(max_length=500, null=False, blank=False)
+    title = models.CharField(max_length=200)
+    game_name = models.CharField(max_length=300)
+    review = RichTextField(max_length=5000)  # Increased max length
     image = ResizedImageField(
-        size=[400, None],
-        quality=80,
+        size=[800, None],  # Increased image size
+        quality=85,
         upload_to="game/",
         force_format="WEBP",
-        blank=False,
-        null=False,
     )
-    image_alt = models.CharField(max_length=100, null=False, blank=False)
+    image_alt = models.CharField(max_length=100)
     type_game = models.CharField(
-        max_length=50, choices=GAME_TYPE, default="Single Player"
+        max_length=50, 
+        choices=GAME_TYPE,
+        default="single_player"
     )
     genre = models.CharField(
         max_length=50,
         choices=GENRE_TYPE,
-        default="Games"
-        )
-    developer = models.CharField(max_length=20, null=False, blank=False)
-    posted = models.DateTimeField(auto_now=True)
+        default="action"
+    )
+    developer = models.CharField(max_length=100)  # Increased max length
+    posted_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-posted_date']
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'
 
-class Meta:
-    ordering = ["posted_date"]
+    def __str__(self):
+        return f"{self.title} by {self.user.username}"
 
-
-def __str__(self):
-    return str(self.title)
+    def get_absolute_url(self):
+        return reverse('review_detail', kwargs={'pk': self.pk})
 

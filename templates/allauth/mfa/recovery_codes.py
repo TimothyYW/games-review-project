@@ -94,15 +94,21 @@ class RecoveryCodes:
             self.instance.save()
             return True
 
-    def validate_code(self, code):
+    def validate_code(self, code: str) -> bool:
+        """
+        Validate a recovery code.
+        Uses constant-time comparison to prevent timing attacks.
+        """
+        from django.utils.crypto import constant_time_compare
+        
         ret = self._validate_migrated_code(code)
         if ret is not None:
             return ret
 
-        for i, c in enumerate(self.generate_codes()):
+        for i, stored_code in enumerate(self.generate_codes()):
             if self._is_code_used(i):
                 continue
-            if code == c:
+            if constant_time_compare(code, stored_code):
                 self._mark_code_used(i)
                 return True
         return False

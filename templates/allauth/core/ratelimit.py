@@ -1,53 +1,80 @@
 import hashlib
 import time
 from collections import namedtuple
+from typing import List, Optional, Tuple
 
 from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
 
 Rate = namedtuple("Rate", "amount duration per")
 
+DURATION_UNITS = {
+    's': 1,        # seconds
+    'm': 60,       # minutes
+    'h': 3600,     # hours
+    'd': 86400,    # days
+}
 
-def _parse_duration(duration):
-    if len(duration) == 0:
-        raise ValueError(duration)
+
+def _parse_duration(duration: str) -> float:
+    """Parse duration string into seconds."""
+    if not duration:
+        raise ValueError("Empty duration")
+    
     unit = duration[-1]
-    value = duration[0:-1]
-    unit_map = {"s": 1, "m": 60, "h": 3600, "d": 86400}
-    if unit not in unit_map:
-        raise ValueError("Invalid duration unit: %s" % unit)
-    if len(value) == 0:
-        value = 1
-    else:
-        value = float(value)
-    return value * unit_map[unit]
+    if unit not in DURATION_UNITS:
+        raise ValueError(f"Invalid duration unit: {unit}")
+    
+    try:
+        value = float(duration[:-1]) if len(duration) > 1 else 1
+        return value * DURATION_UNITS[unit]
+    except ValueError:
+        raise ValueError(f"Invalid duration value: {duration[:-1]}")
 
 
-def _parse_rate(rate):
-    parts = rate.split("/")
-    if len(parts) == 2:
-        amount, duration = parts
-        per = "ip"
-    elif len(parts) == 3:
-        amount, duration, per = parts
-    else:
-        raise ValueError(rate)
-    amount = int(amount)
-    duration = _parse_duration(duration)
+def _parse_rate(rate: str) -> Rate:
+    """Parse single rate string into Rate object."""
+    parts = rate.split('/')
+    if len(parts) not in (2, 3):
+        raise ValueError(f"Invalid rate format: {rate}")
+    
+    amount = int(parts[0])
+    duration = _parse_duration(parts[1])
+    per = parts[2] if len(parts) == 3 else "ip"
+    
+    if per not in ("ip", "user", "key"):
+        raise ValueError(f"Invalid rate target: {per}")
+    
     return Rate(amount, duration, per)
 
 
-def _parse_rates(rates):
-    ret = []
-    if rates:
-        rates = rates.strip()
-        if rates:
-            parts = rates.split(",")
-            for part in parts:
-                ret.append(_parse_rate(part.strip()))
-    return ret
+def _parse_rates(rates: Optional[str]) -> List[Rate]:
+    """Parse multiple rates string into list of Rate objects."""
+    if not rates:
+        return []
+    return [_parse_rate(r.strip()) for r in rates.split(',') if r.strip()]
+
+
+def _get_rate_source(request: HttpRequest, rate: Rate, key: Optional[str] = None,
+                    user: Optional['User'] = None) -> Tuple[str, str]:
+    """Get rate limiting source identifier."""
+    from allauth.account.adapter import get_adapter
+    
+    if rate.per == "ip":
+        return "ip", get_adapter().get_client_ip(request)
+    elif rate.per == "user":
+        if not user and not request.user.is_authenticated:
+            raise ImproperlyConfigured("Rate limit per user requires authentication")
+        return "user", str((user or request.user).pk)
+    elif rate.per == "key":
+        if not key:
+            raise ImproperlyConfigured("Rate limit per key requires a key")
+        return "key", hashlib.sha256(key.encode("utf8")).hexdigest()
+    
+    raise ValueError(f"Invalid rate target: {rate.per}")
 
 
 def _cache_key(request, *, action, rate, key=None, user=None):
@@ -103,16 +130,44 @@ def consume(request, *, action, key=None, user=None):
 
 
 def _consume_rate(request, *, action, rate, key=None, user=None):
+    """
+    Consume a rate limit attempt with improved caching.
+    Uses Redis pipeline if available for atomic operations.
+    """
     cache_key = _cache_key(request, action=action, rate=rate, key=key, user=user)
-    history = cache.get(cache_key, [])
-    now = time.time()
-    while history and history[-1] <= now - rate.duration:
-        history.pop()
-    allowed = len(history) < rate.amount
-    if allowed:
-        history.insert(0, now)
-        cache.set(cache_key, history, rate.duration)
-    return allowed
+    
+    try:
+        # Try to use Redis pipeline for atomic operations
+        if hasattr(cache, 'pipeline'):
+            with cache.pipeline() as pipe:
+                pipe.multi()
+                history = pipe.get(cache_key) or []
+                now = time.time()
+                
+                # Clean old entries
+                history = [t for t in history if t > (now - rate.duration)]
+                
+                if len(history) < rate.amount:
+                    history.insert(0, now)
+                    pipe.set(cache_key, history, rate.duration)
+                    allowed = True
+                else:
+                    allowed = False
+                
+                pipe.execute()
+                return allowed
+    except AttributeError:
+        # Fall back to regular cache if Redis isn't available
+        history = cache.get(cache_key, [])
+        now = time.time()
+        history = [t for t in history if t > (now - rate.duration)]
+        
+        allowed = len(history) < rate.amount
+        if allowed:
+            history.insert(0, now)
+            cache.set(cache_key, history, rate.duration)
+        
+        return allowed
 
 
 def consume_or_429(request, *args, **kwargs):

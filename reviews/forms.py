@@ -4,11 +4,12 @@ from .models import Review
 
 
 class ReviewForm(forms.ModelForm):
-    """Form to leave the review"""
+    """Form to create and edit reviews"""
 
     class Meta:
         model = Review
         fields = [
+            "title",
             "game_name",
             "review",
             "image",
@@ -18,18 +19,29 @@ class ReviewForm(forms.ModelForm):
             "developer",
         ]
 
-        reviews = forms.CharField(widget=RichTextWidget())
-
         widgets = {
-            "review": forms.Textarea(attrs={"rows": 5}),
+            "title": forms.TextInput(attrs={'class': 'form-control'}),
+            "game_name": forms.TextInput(attrs={'class': 'form-control'}),
+            "review": RichTextWidget(),
+            "image_alt": forms.TextInput(attrs={'class': 'form-control'}),
+            "developer": forms.TextInput(attrs={'class': 'form-control'}),
         }
 
         labels = {
-            "user": "Username",
-            "review": "Review",
-            "image": "Game picture",
-            "image_alt": "Describ image",
-            "type_game": "Type game",
+            "title": "Review Title",
+            "game_name": "Game Name",
+            "review": "Your Review",
+            "image": "Game Picture",
+            "image_alt": "Image Description",
+            "type_game": "Game Type",
             "genre": "Genre",
             "developer": "Developer",
         }
+
+    def clean_image(self):
+        """Validate image size"""
+        image = self.cleaned_data.get('image', False)
+        if image:
+            if image.size > 2 * 1024 * 1024:  # 2MB limit
+                raise forms.ValidationError("Image file too large ( > 2MB )")
+        return image

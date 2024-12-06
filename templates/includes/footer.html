@@ -1,23 +1,85 @@
 {% load static %}
 
-<footer>
-    <!--social media icon-->
-    <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Youtube - Opens in a new tab">
-        <img src="{% static 'icons/youtube-app-icon.svg' %}" alt="Youtube icon" class="social-icon">
-    </a>
-    <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook - Opens in a new tab">
-        <img src="{% static 'icons/facebook-app-icon.svg' %}" alt="Facebook icon" class="social-icon">
-    </a>
-    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram - Opens in a new tab">
-        <img src="{% static 'icons/instagram-app-icon.svg' %}" alt="Instagram icon" class="social-icon">
-    </a>
-    <a href="https://discord.com/" target="_blank" rel="noopener" aria-label="Discord - Opens in a new tab">
-        <img src="{% static 'icons/discord-app-icon.svg' %}" alt="Discord icon" class="social-icon">
-    </a>
-    <a href="https://store.steampowered.com/" target="_blank" rel="noopener" aria-label="Steam - Opens in a new tab">
-        <img src="{% static 'icons/steam-app-icon.svg' %}" alt="Steam icon" class="social-icon">
-    </a>
-    <a href="https://www.x.com/" target="_blank" rel="noopener" aria-label="X - Opens in a new tab">
-        <img src="{% static 'icons/x-app-icon.svg' %}" alt="X icon" class="social-icon">
-    </a>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-12">
+                <div class="social-links">
+                    {% with socials=social_links %}
+                    <a href="https://www.youtube.com/" 
+                       class="social-link mx-2" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       aria-label="Visit our YouTube channel">
+                        <img src="{% static 'icons/youtube-app-icon.svg' %}" 
+                             alt="YouTube" 
+                             class="social-icon" 
+                             width="32" 
+                             height="32">
+                    </a>
+                    <a href="https://www.facebook.com/" 
+                       class="social-link mx-2" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       aria-label="Visit our Facebook page">
+                        <img src="{% static 'icons/facebook-app-icon.svg' %}" 
+                             alt="Facebook" 
+                             class="social-icon" 
+                             width="32" 
+                             height="32">
+                    </a>
+                    <a href="https://www.instagram.com/" 
+                       class="social-link mx-2"
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       aria-label="Visit our Instagram page">
+                        <img src="{% static 'icons/instagram-app-icon.svg' %}" 
+                             alt="Instagram" 
+                             class="social-icon"
+                             width="32" 
+                             height="32">
+                    </a>
+                    <a href="https://discord.com/" 
+                       class="social-link mx-2"
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       aria-label="Join our Discord server">
+                        <img src="{% static 'icons/discord-app-icon.svg' %}" 
+                             alt="Discord" 
+                             class="social-icon"
+                             width="32" 
+                             height="32">
+                    </a>
+                    <a href="https://store.steampowered.com/" 
+                       class="social-link mx-2"
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       aria-label="Visit our Steam page">
+                        <img src="{% static 'icons/steam-app-icon.svg' %}" 
+                             alt="Steam" 
+                             class="social-icon"
+                             width="32" 
+                             height="32">
+                    </a>
+                    <a href="https://www.x.com/" 
+                       class="social-link mx-2"
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       aria-label="Follow us on X">
+                        <img src="{% static 'icons/x-app-icon.svg' %}" 
+                             alt="X" 
+                             class="social-icon"
+                             width="32" 
+                             height="32">
+                    </a>
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <p class="mb-0">&copy; {% now "Y" %} Games Review. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
 </footer>

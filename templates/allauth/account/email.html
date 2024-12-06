@@ -1,90 +1,131 @@
 {% extends "account/base_manage_email.html" %}
 {% load allauth i18n %}
+{% load crispy_forms_tags %}
+
 {% block head_title %}
-    {% trans "Email Addresses" %}
-{% endblock head_title %}
+    {% trans "Email Management" %}
+{% endblock %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Email Addresses" %}
-    {% endelement %}
-    {% if emailaddresses %}
-        <p>{% trans 'The following email addresses are associated with your account:' %}</p>
-        {% url 'account_email' as email_url %}
-        {% element form form=form action=email_url method="post" %}
-            {% slot body %}
-                {% csrf_token %}
-                {% for radio in emailaddress_radios %}
-                    {% with emailaddress=radio.emailaddress %}
-                        {% element field type="radio" checked=radio.checked name="email" value=emailaddress.email id=radio.id %}
-                            {% slot label %}
-                                {{ emailaddress.email }}
-                                {% if emailaddress.verified %}
-                                    {% element badge tags="success,email,verified" %}
-                                        {% translate "Verified" %}
-                                    {% endelement %}
-                                {% else %}
-                                    {% element badge tags="warning,email,unverified" %}
-                                        {% translate "Unverified" %}
-                                    {% endelement %}
-                                {% endif %}
-                                {% if emailaddress.primary %}
-                                    {% element badge tags="email,primary" %}
-                                        {% translate "Primary" %}
-                                    {% endelement %}
-                                {% endif %}
-                            {% endslot %}
-                        {% endelement %}
-                    {% endwith %}
-                {% endfor %}
-            {% endslot %}
-            {% slot actions %}
-                {% element button type="submit" name="action_primary" %}
-                    {% trans 'Make Primary' %}
-                {% endelement %}
-                {% element button tags="secondary" type="submit" name="action_send" %}
-                    {% trans 'Re-send Verification' %}
-                {% endelement %}
-                {% element button tags="danger,delete" type="submit" name="action_remove" %}
-                    {% trans 'Remove' %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
-    {% else %}
-        {% include "account/snippets/warn_no_email.html" %}
-    {% endif %}
-    {% if can_add_email %}
-        {% element h2 %}
-            {% trans "Add Email Address" %}
-        {% endelement %}
-        {% url 'account_email' as action_url %}
-        {% element form form=form method="post" action=action_url %}
-            Hoi bef bod
-            {% slot body %}
-                {% csrf_token %}
-                {% element fields form=form %}
-                {% endelement %}
-            {% endslot %}
-            befac
-            {% slot actions %}
-                {% element button name="action_add" type="submit" %}
-                    {% trans "Add Email" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
-    {% endif %}
-{% endblock content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4">{% trans "Email Addresses" %}</h1>
+                        
+                        {% if emailaddresses %}
+                            <p class="text-center">
+                                {% trans 'The following email addresses are associated with your account:' %}
+                            </p>
+                            
+                            <form action="{% url 'account_email' %}" method="post" class="email-management-form">
+                                {% csrf_token %}
+                                
+                                <div class="email-list mb-4">
+                                    {% for emailaddress in emailaddresses %}
+                                        <div class="form-check mb-3">
+                                            <input type="radio" 
+                                                   name="email" 
+                                                   class="form-check-input"
+                                                   {% if emailaddress.primary %}checked="checked"{% endif %}
+                                                   value="{{ emailaddress.email }}"
+                                                   id="email_radio_{{ forloop.counter }}"
+                                                   aria-label="{{ emailaddress.email }}">
+                                            
+                                            <label class="form-check-label" for="email_radio_{{ forloop.counter }}">
+                                                {{ emailaddress.email }}
+                                                {% if emailaddress.verified %}
+                                                    <span class="badge bg-success">{% trans "Verified" %}</span>
+                                                {% else %}
+                                                    <span class="badge bg-warning">{% trans "Unverified" %}</span>
+                                                {% endif %}
+                                                {% if emailaddress.primary %}
+                                                    <span class="badge bg-primary">{% trans "Primary" %}</span>
+                                                {% endif %}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="button-group text-center">
+                                    <button type="submit" 
+                                            name="action_primary" 
+                                            class="btn btn-primary me-2"
+                                            {% if not emailaddresses %}disabled{% endif %}>
+                                        {% trans 'Make Primary' %}
+                                    </button>
+                                    
+                                    <button type="submit" 
+                                            name="action_send" 
+                                            class="btn btn-secondary me-2"
+                                            {% if not emailaddresses %}disabled{% endif %}>
+                                        {% trans 'Re-send Verification' %}
+                                    </button>
+                                    
+                                    <button type="submit" 
+                                            name="action_remove" 
+                                            class="btn btn-danger"
+                                            {% if not emailaddresses %}disabled{% endif %}
+                                            data-confirm="{% trans 'Are you sure you want to remove this email address?' %}">
+                                        {% trans 'Remove' %}
+                                    </button>
+                                </div>
+                            </form>
+                        {% else %}
+                            <div class="alert alert-warning" role="alert">
+                                {% trans 'You currently have no email address set up.' %}
+                            </div>
+                        {% endif %}
+
+                        {% if can_add_email %}
+                            <div class="add-email-section mt-4">
+                                <h2 class="text-center mb-3">{% trans "Add Email Address" %}</h2>
+                                
+                                <form method="post" action="{% url 'account_email' %}" class="add-email-form">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <div class="text-center">
+                                        <button name="action_add" 
+                                                type="submit" 
+                                                class="btn btn-success mt-3">
+                                            {% trans "Add Email" %}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block extra_body %}
-    <script type="text/javascript">
+<script>
 (function() {
-  var message = "{% trans 'Do you really want to remove the selected email address?' %}";
-  var actions = document.getElementsByName('action_remove');
-  if (actions.length) {
-    actions[0].addEventListener("click", function(e) {
-      if (! confirm(message)) {
-        e.preventDefault();
-      }
+    // Handle email removal confirmation
+    document.querySelectorAll('button[name="action_remove"]').forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            const confirmMessage = this.getAttribute('data-confirm');
+            if (!confirm(confirmMessage)) {
+                e.preventDefault();
+            }
+        });
     });
-  }
+
+    // Disable buttons if no email is selected
+    const emailForm = document.querySelector('.email-management-form');
+    if (emailForm) {
+        emailForm.addEventListener('change', function(e) {
+            const hasSelection = this.querySelector('input[name="email"]:checked');
+            const buttons = this.querySelectorAll('button[type="submit"]');
+            buttons.forEach(button => {
+                button.disabled = !hasSelection;
+            });
+        });
+    }
 })();
-    </script>
-{% endblock extra_body %}
+</script>
+{% endblock %}

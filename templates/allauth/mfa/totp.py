@@ -84,9 +84,19 @@ def format_hotp_value(value):
     return f"{value:0{app_settings.TOTP_DIGITS}}"
 
 
-def validate_totp_code(secret, code):
-    value = hotp_value(secret, hotp_counter_from_time())
-    return code == format_hotp_value(value)
+def validate_totp_code(secret: str, code: str) -> bool:
+    """
+    Validate a TOTP code against a secret.
+    Uses constant-time comparison to prevent timing attacks.
+    """
+    from django.utils.crypto import constant_time_compare
+    
+    try:
+        value = hotp_value(secret, hotp_counter_from_time())
+        expected = format_hotp_value(value)
+        return constant_time_compare(code, expected)
+    except (ValueError, TypeError):
+        return False
 
 
 class TOTP:
